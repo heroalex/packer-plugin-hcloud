@@ -53,6 +53,7 @@ type Config struct {
 	PublicIPv6         string   `mapstructure:"public_ipv6"`
 	PublicIPv6Disabled bool     `mapstructure:"public_ipv6_disabled"`
 	Firewalls          []string `mapstructure:"firewalls"`
+	Volumes            []string `mapstructure:"volumes"`
 
 	RescueMode string `mapstructure:"rescue"`
 
