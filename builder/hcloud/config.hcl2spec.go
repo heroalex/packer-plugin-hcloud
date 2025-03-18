@@ -90,6 +90,7 @@ type FlatConfig struct {
 	PublicIPv6Disabled        *bool             `mapstructure:"public_ipv6_disabled" cty:"public_ipv6_disabled" hcl:"public_ipv6_disabled"`
 	Firewalls                 []string          `mapstructure:"firewalls" cty:"firewalls" hcl:"firewalls"`
 	RescueMode                *string           `mapstructure:"rescue" cty:"rescue" hcl:"rescue"`
+	KeepServer	        *bool             `mapstructure:"keep_server" cty:"keep_server" hcl:"keep_server"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -184,6 +185,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"public_ipv6_disabled":         &hcldec.AttrSpec{Name: "public_ipv6_disabled", Type: cty.Bool, Required: false},
 		"firewalls":                    &hcldec.AttrSpec{Name: "firewalls", Type: cty.List(cty.String), Required: false},
 		"rescue":                       &hcldec.AttrSpec{Name: "rescue", Type: cty.String, Required: false},
+		"keep_server":         		&hcldec.AttrSpec{Name: "keep_server", Type: cty.Bool, Required: false},
 	}
 	return s
 }
