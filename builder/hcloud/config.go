@@ -57,6 +57,7 @@ type Config struct {
 	RescueMode string `mapstructure:"rescue"`
 
 	KeepServer bool     `mapstructure:"keep_server"`
+	SkipSnapshot bool     `mapstructure:"skip_snapshot"`
 
 	ctx interpolate.Context
 }
