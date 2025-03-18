@@ -18,6 +18,10 @@ type stepCreateSnapshot struct{}
 func (s *stepCreateSnapshot) Run(ctx context.Context, state multistep.StateBag) multistep.StepAction {
 	c, ui, client := UnpackState(state)
 
+	if c.SkipSnapshot == true {
+		return multistep.ActionContinue
+	}
+
 	serverID := state.Get(StateServerID).(int64)
 
 	ui.Say("Creating snapshot...")
