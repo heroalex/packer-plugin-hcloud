@@ -221,12 +221,11 @@ func (s *stepCreateServer) Run(ctx context.Context, state multistep.StateBag) mu
 }
 
 func (s *stepCreateServer) Cleanup(state multistep.StateBag) {
+	c, ui, client := UnpackState(state)
 	// If the serverID isn't there, we probably never created it
-	if s.serverId == 0 {
+	if s.serverId == 0 || c.KeepServer == true {
 		return
 	}
-
-	_, ui, client := UnpackState(state)
 
 	// Destroy the server we just created
 	ui.Say("Destroying server...")
