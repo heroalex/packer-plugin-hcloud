@@ -91,6 +91,7 @@ type FlatConfig struct {
 	Firewalls                 []string          `mapstructure:"firewalls" cty:"firewalls" hcl:"firewalls"`
 	RescueMode                *string           `mapstructure:"rescue" cty:"rescue" hcl:"rescue"`
 	KeepServer	        *bool             `mapstructure:"keep_server" cty:"keep_server" hcl:"keep_server"`
+	SkipSnapshot 		*bool     	`mapstructure:"skip_snapshot" cty:"skip_snapshot" hcl:"skip_snapshot"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -186,6 +187,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"firewalls":                    &hcldec.AttrSpec{Name: "firewalls", Type: cty.List(cty.String), Required: false},
 		"rescue":                       &hcldec.AttrSpec{Name: "rescue", Type: cty.String, Required: false},
 		"keep_server":         		&hcldec.AttrSpec{Name: "keep_server", Type: cty.Bool, Required: false},
+		"skip_snapshot":         	&hcldec.AttrSpec{Name: "skip_snapshot", Type: cty.Bool, Required: false},
 	}
 	return s
 }
