@@ -9,8 +9,8 @@ import (
 
 	"github.com/hashicorp/packer-plugin-sdk/plugin"
 
-	"github.com/hetznercloud/packer-plugin-hcloud/builder/hcloud"
-	"github.com/hetznercloud/packer-plugin-hcloud/version"
+	"github.com/heroalex/packer-plugin-hcloud/builder/hcloud"
+	"github.com/heroalex/packer-plugin-hcloud/version"
 )
 
 func main() {
