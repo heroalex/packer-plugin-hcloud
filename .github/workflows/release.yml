@@ -25,13 +25,6 @@ jobs:
         with:
           go-version: "1.23"
 
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
       - name: Describe plugin api_version
         id: describe_plugin
         run: echo "api_version=$(go run . describe | jq -r '.api_version')" >> "$GITHUB_OUTPUT"
@@ -43,21 +36,4 @@ jobs:
           args: release --clean --timeout 120m
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
           API_VERSION: ${{ steps.describe_plugin.outputs.api_version }}
-
-  notify-release:
-    needs: [release]
-
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - run: echo "RELEASE_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
-
-      - uses: hashicorp/integration-release-action@main
-        with:
-          integration_identifier: packer/hetznercloud/hcloud
-          release_version: ${{ env.RELEASE_VERSION }}
-          release_sha: ${{ github.sha }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
