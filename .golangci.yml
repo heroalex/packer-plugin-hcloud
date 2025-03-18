@@ -4,7 +4,7 @@ linters-settings:
     sections:
       - standard
       - default
-      - prefix(github.com/hetznercloud)
+      - prefix(github.com/heroalex)
   exhaustive:
     default-signifies-exhaustive: true
   misspell:
