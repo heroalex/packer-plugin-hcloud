@@ -64,7 +64,7 @@ func (s *stepCreateServer) Run(ctx context.Context, state multistep.StateBag) mu
 		firewalls = append(firewalls, &hcloud.ServerCreateFirewall{Firewall: *firewall})
 	}
 
-	volumes := make([]*hcloud.ServerCreateVolume, 0, len(c.Volumes))
+	volumes := make([]*hcloud.Volume, 0, len(c.Volumes))
 	for _, idOrName := range c.Volumes {
 		volume, _, err := client.Volume.Get(ctx, idOrName)
 		if err != nil {
@@ -73,7 +73,7 @@ func (s *stepCreateServer) Run(ctx context.Context, state multistep.StateBag) mu
 		if volume == nil {
 			return errorHandler(state, ui, "", fmt.Errorf("Could not find volume '%s'", idOrName))
 		}
-		volumes = append(volumes, &hcloud.ServerCreateVolume{Volume: *volume})
+		volumes = append(volumes, volume)
 	}
 
 	var image *hcloud.Image
